@@ -1,40 +1,68 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/pages/api-reference/create-next-app).
+# Todo Uygulaması Görevi
 
-## Getting Started
+Bu, API istekleri için bir servis katmanı aracılığıyla etkileşim sağlayan client-side bileşenlere sahip bir Todo uygulamasını gösteren Next.js projesidir. API, Prisma ve MongoDB ile desteklenmektedir.
 
-First, run the development server:
+## Özellikler
+- **CRUD İşlemleri:** Todo ekleme, okuma, güncelleme ve silme.
+- **API Rotaları:** Arka uç işlevselliği için Next.js API rotaları.
+- **Servis Katmanı:** API iletişimini yöneten özel `getAPI` ve `postAPI` fonksiyonları.
+- **Prisma Entegrasyonu:** Veritabanı olarak MongoDB kullanan Prisma.
+- **Durum Yönetimi:** Global durum yönetimi için Zustand.
+- **Modern Arayüz:** TailwindCSS ile stillendirilmiş React bileşenleri.
 
+## Başlangıç
+
+### Ön Koşullar
+- Node.js (v14 veya daha yeni)
+- Bir MongoDB Atlas hesabı (ya da yerel bir MongoDB örneği)
+- Git
+
+### Kurulum
+
+1. **Depoyu Klonlayın:**
+   ```bash
+   git clone <repository_url>
+   ```
+2. **Proje Dizini'ne Geçin:**
+   ```bash
+   cd todo-app-task
+   ```
+3. **Bağımlılıkları Yükleyin:**
+   ```bash
+   npm install
+   # veya
+   yarn install
+   ```
+
+4. **Ortam Değişkenleri:**
+
+   Kök dizinde, bağlantı bilgilerinizin bulunduğu bir `.env` dosyası oluşturun. Örnek:
+   ```properties
+   DATABASE_URL="mongodb+srv://<kullanıcı_adı>:<şifre>@cluster0.<cluster_id>.mongodb.net/todo-app?retryWrites=true&w=majority&appName=Cluster0"
+   NEXT_PUBLIC_API_URL=http://localhost:3000/api
+   ```
+
+### Geliştirme Sunucusunu Çalıştırma
+
+Sunucuyu şu komutla başlatın:
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
+Ardından tarayıcınızda [http://localhost:3000](http://localhost:3000) adresini açın.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Proje Yapısı
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
-
-[API routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
-
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes) instead of React pages.
-
-This project uses [`next/font`](https://nextjs.org/docs/pages/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn-pages-router) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/pages/building-your-application/deploying) for more details.
+- **pages/api/todos/**
+  - `index.js`: Todo'lar için GET ve POST isteklerini yönetir.
+  - `[id].js`: Belirli todo'lar için PUT ve DELETE isteklerini yönetir.
+- **components/**
+  - `TodoItem.jsx`, `TodoList.jsx` ve `TodoForm.jsx` gibi UI bileşenlerini içerir.
+- **services/**
+  - `api.js`: Merkezi API istekleri için `getAPI` ve `postAPI` fonksiyonlarını içerir.
+  - `todoServices.js`: Todo işlemlerini gerçekleştirmek için `getAPI` ve `postAPI` fonksiyonlarını kullanır.
+- **lib/**
+  - `prisma.js`: `.env` dosyanızdaki `DATABASE_URL` kullanılarak Prisma istemcisini başlatır.
+- **prisma/**
+  - `schema.prisma`: Veritabanı şemasını ve Prisma yapılandırmasını tanımlar.
+- **store/**
+  - Uygulama durumunu yönetmek için Zustand store'u içerir.
