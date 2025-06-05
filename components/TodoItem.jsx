@@ -5,11 +5,11 @@ import useTodoStore from "@/store/todoStore";
 export default function TodoItem({ todo}) {
     const { deleteTodo, updateTodo } = useTodoStore();
 
-    const handleToggle = async() => {
+    const onToggle = async() => {
         await updateTodo(todo.id, {completed: !todo.completed});
     };
 
-    const handleDelete = async() => {
+    const onDelete = async() => {
         await deleteTodo(todo.id);
     };
 
@@ -19,14 +19,14 @@ export default function TodoItem({ todo}) {
                 <input 
                     type="checkbox" 
                     checked={todo.completed}
-                    onChange={handleToggle} 
+                    onChange={onToggle} 
                     className="cursor-pointer"
                 />
                 <span>{todo.title}</span>
             </div>
 
             <button 
-                onClick={handleDelete} 
+                onClick={onDelete} 
                 className="text-red-600 text-md hover:underline cursor-pointer"
             >
                 Sil

@@ -7,7 +7,7 @@ export default function TodoForm() {
     const [title, setTitle] = useState("");
     const addTodo = useTodoStore((state) => state.addTodo);
 
-    const handleSubmit = async(e) => {
+    const onSubmit = async(e) => {
         e.preventDefault();
 
         if (!title.trim()) return;
@@ -16,7 +16,7 @@ export default function TodoForm() {
     };
 
     return (
-        <form onSubmit={handleSubmit} className="flex gap-2">
+        <form onSubmit={onSubmit} className="flex gap-2">
             <input 
                 className="flex-1 border border-gray-300 p-3 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-400" 
                 type="text" 
